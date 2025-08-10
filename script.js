@@ -69,21 +69,20 @@ buttons.addEventListener("click", (e) => {
   //get operator inputs
   if (target.classList.contains("operator")) {
     if (firstDigit && secondDigit) {
-      const result = operate(firstDigit, secondDigit, operator);
+      const result = operate(Number(firstDigit), Number(secondDigit), operator);
       firstDigit = String(result);
       secondDigit = '';
     }
     operator = target.textContent;
   }
-
   if (target.classList.contains("equals")) {
     if (firstDigit && secondDigit && operator) {
-      const result = operate(firstDigit, secondDigit, operator);
+      const result = operate(Number(firstDigit), Number(secondDigit), operator);
       firstDigit = String(result);
       secondDigit = '';
+      operator = '';
     }
   }
-
 
   updateDisplay();
 })
