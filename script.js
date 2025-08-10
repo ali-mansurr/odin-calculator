@@ -34,10 +34,28 @@ let secondDigit = '';
 let operator = '';
 
 const buttons = document.querySelector(".calc-buttons");
+const display = document.querySelector(".calc-display");
+
+function updateDisplay() {
+  if (operator) {
+    display.textContent = `${firstDigit} ${operator} ${secondDigit}`;
+  } else {
+    display.textContent = `${firstDigit}`;
+  }
+}
 
 buttons.addEventListener("click", (e) => {
   const target = e.target;
   if (!target.matches("button")) return;
+
+  if (target.classList.contains("clear")) {
+    firstDigit = '';
+    secondDigit = '';
+    operator = '';
+    display.textContent = '';
+    return
+  }
+
 
   //get number inputs 
   if (target.classList.contains("digit")) {
@@ -66,5 +84,6 @@ buttons.addEventListener("click", (e) => {
     }
   }
 
-  
+
+  updateDisplay();
 })
