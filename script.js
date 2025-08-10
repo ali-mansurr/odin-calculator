@@ -19,9 +19,9 @@ function operate(a, b, operator) {
     case '+':
       return sum(a, b);
     case '-':
-      return subtract(b, b);
-    case '/':
-      return divide(a, b);
+      return subtract(a, b);
+    case '÷':
+      return divide(a, b).toPrecision(3);
     case '*':
       return multiply(a, b);
     default:
@@ -40,7 +40,7 @@ function updateDisplay() {
   if (operator) {
     display.textContent = `${firstDigit} ${operator} ${secondDigit}`;
   } else {
-    display.textContent = `${firstDigit}`;
+    display.textContent = firstDigit;
   }
 }
 
@@ -53,7 +53,7 @@ buttons.addEventListener("click", (e) => {
     secondDigit = '';
     operator = '';
     display.textContent = '';
-    return
+    return;
   }
 
 
@@ -68,6 +68,7 @@ buttons.addEventListener("click", (e) => {
 
   //get operator inputs
   if (target.classList.contains("operator")) {
+    if(!firstDigit) return;
     if (firstDigit && secondDigit) {
       const result = operate(Number(firstDigit), Number(secondDigit), operator);
       firstDigit = String(result);
